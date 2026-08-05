@@ -1,46 +1,4 @@
-\documentclass[11pt]{scrartcl}
-
-% ---------- Packages ----------
-\usepackage[margin=1in]{geometry}
-\usepackage{mathpazo}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\usepackage[most]{tcolorbox}
-\usepackage{xcolor}
-\usepackage{hyperref}
-
-% ---------- Colors ----------
-\definecolor{accentblue}{RGB}{44,95,138}
-\definecolor{boxfill}{RGB}{240,245,250}
-\definecolor{boxborder}{RGB}{180,200,220}
-\definecolor{highlightred}{RGB}{200,50,50}
-
-% ---------- Theorem environments ----------
-\newtcolorbox{thmbox}[1]{
-  colback=boxfill, colframe=boxborder,
-  boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
-  fonttitle=\bfseries\color{accentblue}, title=#1
-}
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-
-\hypersetup{colorlinks=true, linkcolor=accentblue, urlcolor=accentblue}
-
-% ---------- Footer ----------
-\usepackage{scrlayer-scrpage}
-\pagestyle{scrheadings}
-\clearpairofpagestyles
-\cfoot{\footnotesize Page~\thepage\ --- For error reporting or contributing, visit \url{https://github.com/nasro-bay/Graph_theory_proofs}}
-
-\title{\color{accentblue}Connectivity in Graphs}
-\author{}
-\date{}
-
-\begin{document}
-\maketitle
+\section{Connectivity in Graphs}
 
 % =========================================================
 \begin{thmbox}{Theorem 1}
@@ -107,5 +65,3 @@ By Theorem 2,
 $$\frac{(n-1)(n-2)}{2} \geq \frac{(n-k)(n-k+1)}{2}, \qquad \forall\, k \geq 2,$$
 which implies $k = 1$.
 \end{proof}
-
-\end{document}

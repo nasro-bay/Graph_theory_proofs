@@ -1,46 +1,4 @@
-\documentclass[11pt]{scrartcl}
-
-% ---------- Packages ----------
-\usepackage[margin=1in]{geometry}
-\usepackage{mathpazo}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
-\usepackage[most]{tcolorbox}
-\usepackage{xcolor}
-\usepackage{hyperref}
-
-% ---------- Colors ----------
-\definecolor{accentblue}{RGB}{44,95,138}
-\definecolor{boxfill}{RGB}{240,245,250}
-\definecolor{boxborder}{RGB}{180,200,220}
-\definecolor{highlightred}{RGB}{200,50,50}
-
-% ---------- Theorem environments ----------
-\newtcolorbox{thmbox}[1]{
-  colback=boxfill, colframe=boxborder,
-  boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
-  fonttitle=\bfseries\color{accentblue}, title=#1
-}
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-
-\hypersetup{colorlinks=true, linkcolor=accentblue, urlcolor=accentblue}
-
-% ---------- Footer ----------
-\usepackage{scrlayer-scrpage}
-\pagestyle{scrheadings}
-\clearpairofpagestyles
-\cfoot{\footnotesize Page~\thepage\ --- For error reporting or contributing, visit \url{https://github.com/nasro-bay/Graph_theory_proofs}}
-
-\title{\color{accentblue}Planarity}
-\author{}
-\date{}
-
-\begin{document}
-\maketitle
+\section{Planarity}
 
 % =========================================================
 \begin{thmbox}{Theorem 1}
@@ -166,5 +124,3 @@ Suppose, for contradiction, that $d_i \geq 6$ for every vertex. Then
 $$\sum d_i \geq 6n \implies 2m \geq 6n \implies m \geq 3n > 3n - 6,$$
 contradicting $m \leq 3n-6$ (Corollary 1(i)).
 \end{proof}
-
-\end{document}
