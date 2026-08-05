@@ -40,39 +40,4 @@ This repo is open to contributions:
 - Please test-compile (`pdflatex`) before opening a PR, and don't commit
   build artifacts (`.aux`, `.log`, `.out`) — see the `.gitignore` note below.
 
-## Configuring the public repo
 
-Target: https://github.com/nasro-bay/Graph_theory_proofs
-
-Run these yourself (not executed for you):
-
-```bash
-# 1. Point this local repo at the GitHub remote
-git remote add origin https://github.com/nasro-bay/Graph_theory_proofs.git
-
-# 2. (optional) rename local branch to main to match GitHub's default
-git branch -M main
-
-# 3. Stage and commit the new readme (and anything else pending)
-git add Reaadme.md
-git commit -m "Add collaboration readme"
-
-# 4. Push and set upstream
-git push -u origin main
-```
-
-On GitHub itself (Settings tab of the repo):
-
-- **Visibility**: confirm it's set to *Public*.
-- **Description/topics**: add a short description and topics like
-  `graph-theory`, `latex`, `tikz`, `lecture-notes`.
-- **Issues**: make sure Issues are enabled (Settings → General → Features) so
-  people can report proof errors.
-- **Branch protection** (Settings → Branches): protect `main` and require
-  pull requests before merging, so contributions come in via review instead
-  of direct pushes.
-- **License**: add a LICENSE file (e.g. MIT or CC-BY for lecture-note-style
-  content) so contributors know what they can reuse.
-- **`.gitignore`**: add a LaTeX `.gitignore` (ignore `*.aux`, `*.log`, `*.out`,
-  `*.synctex.gz`) — the `Trees/` folder already has some of these tracked and
-  they're just build noise, not source.
