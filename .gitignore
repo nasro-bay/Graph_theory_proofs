@@ -24,3 +24,5 @@ CLAUDE.local.md
 *claude-conversation*
 *chat-export*
 *.session.json
+
+instructions.md
