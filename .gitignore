@@ -1,0 +1,26 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+*.nav
+*.snm
+*.vrb
+*.synctex(busy)
+
+# LaTeX-compile preview images (regenerated from .tex, not source)
+preview-*.png
+
+# AI assistant / conversation artifacts
+.claude/
+.claude.json
+.claude.json.tmp*
+CLAUDE.local.md
+*claude-conversation*
+*chat-export*
+*.session.json

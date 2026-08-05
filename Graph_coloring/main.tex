@@ -1,0 +1,174 @@
+\documentclass[11pt]{scrartcl}
+
+% ---------- Packages ----------
+\usepackage[margin=1in]{geometry}
+\usepackage{mathpazo}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% ---------- Colors ----------
+\definecolor{accentblue}{RGB}{44,95,138}
+\definecolor{boxfill}{RGB}{240,245,250}
+\definecolor{boxborder}{RGB}{180,200,220}
+\definecolor{highlightred}{RGB}{200,50,50}
+
+% ---------- Theorem environments ----------
+\newtcolorbox{thmbox}[1]{
+  colback=boxfill, colframe=boxborder,
+  boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\bfseries\color{accentblue}, title=#1
+}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\hypersetup{colorlinks=true, linkcolor=accentblue, urlcolor=accentblue}
+
+\title{\color{accentblue}Graph Colouring}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+% =========================================================
+\begin{thmbox}{Theorem 1}
+A graph $G$ is bipartite $\iff \chi(G) = 2$.
+\end{thmbox}
+
+\begin{proof}
+($\Rightarrow$) Since $G$ is bipartite, the vertex set can be split into two sets $A$ and $B$ where all edges connect vertices from different sets. Assign colour 1 to the vertices of $A$ and colour 2 to the vertices of $B$; this yields a 2-colouring. Clearly a bipartite graph is not 1-colourable (unless it has no edges).
+
+\medskip
+($\Leftarrow$) Since $\chi(G) = 2$, we construct two sets $A, B$ based on colour: put the vertices of colour 1 in set $A$, and the vertices of colour 2 in set $B$. Two vertices from the same set are not adjacent, since they have the same colour. Hence $G$ is a bipartite graph.
+\end{proof}
+
+% =========================================================
+\begin{thmbox}{Theorem 2}
+If $G$ is a simple graph with largest vertex degree $\Delta$, then $G$ is $(\Delta+1)$-colourable.
+\end{thmbox}
+
+\begin{proof}
+The proof is by induction on the number of vertices of $G$. Let $G$ be a simple graph with $n$ vertices. If we delete any vertex $v$ and its incident edges, the graph that remains is a simple graph with $n-1$ vertices and largest vertex degree at most $\Delta$. By the induction hypothesis, this graph is $(\Delta+1)$-colourable. A $(\Delta+1)$-colouring for $G$ is then obtained by colouring $v$ with a colour different from the vertices adjacent to $v$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={circle,draw=accentblue,fill=accentblue!15,minimum size=6mm,inner sep=0pt}]
+  % before: v with neighbors
+  \node (v) at (0,0) {$v$};
+  \node (a) at (-1.2,1) {};
+  \node (b) at (1.2,1) {};
+  \node (c) at (-1.2,-1) {};
+  \node (d) at (1.2,-1) {};
+  \draw (v)--(a); \draw (v)--(b); \draw (v)--(c); \draw (v)--(d);
+  \draw (a)--(b); \draw (c)--(d);
+
+  \draw[-{Latex[length=3mm]}, thick] (2.2,0) -- (3.2,0);
+
+  \begin{scope}[xshift=5.5cm]
+    \node (a2) at (-1.2,1) {};
+    \node (b2) at (1.2,1) {};
+    \node (c2) at (-1.2,-1) {};
+    \node (d2) at (1.2,-1) {};
+    \draw (a2)--(b2); \draw (c2)--(d2);
+    \draw (a2)--(c2); \draw (b2)--(d2); \draw (a2)--(d2);
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+\end{proof}
+
+% =========================================================
+\begin{thmbox}{Theorem 3}
+Let $G$ be a connected graph whose maximum vertex degree is $d$. If $G$ is neither a cycle graph with an odd number of vertices nor a complete graph, then $\chi(G) \leq d$.
+\end{thmbox}
+
+\begin{remark}
+This is Brooks' Theorem. (No proof was included in the original notes.)
+\end{remark}
+
+% =========================================================
+\begin{thmbox}{Theorem 4}
+The vertices of any simple connected planar graph $G$ can be coloured with six (or fewer) colours.
+\end{thmbox}
+
+\begin{proof}
+We prove the theorem by induction on the number of vertices. The result is trivial for simple planar graphs with at most 6 vertices. Suppose then that $G$ is a simple planar graph with $n$ vertices, and that all planar graphs with $n-1$ vertices are 6-colourable.
+
+We know that $G$ contains a vertex $v$ of degree at most 5; if we delete $v$ and its incident edges, then the graph that remains has $n-1$ vertices, and is thus 6-colourable. Then a 6-colouring of $G$ is obtained by colouring $v$ with a colour different from the vertices adjacent to $v$.
+\end{proof}
+
+% =========================================================
+\begin{thmbox}{Theorem 5}
+The vertices of any simple connected planar graph can be coloured with five (or fewer) colours.
+\end{thmbox}
+
+\begin{proof}
+Induction on the number of vertices. The result is trivial for simple planar graphs with fewer than six vertices, and we assume that all simple planar graphs with $n-1$ vertices are 5-colourable. $G$ contains a vertex $v$ of degree at most 5. As before, the deletion of $v$ leaves a graph with $n-1$ vertices, which is thus 5-colourable. Our aim is to colour $v$ with one of the five colours.
+
+If $\deg(v) < 5$, then $v$ can be coloured with any colour not assumed by the (at most four) vertices adjacent to $v$, completing the proof.
+
+If $\deg(v) = 5$, and the vertices $v_1, \dots, v_5$ adjacent to $v$ are arranged around $v$ in clockwise order: if the vertices are mutually adjacent, then $G$ contains the non-planar graph $K_5$ as a subgraph, which is impossible.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85, every node/.style={circle,draw=accentblue,fill=accentblue!15,minimum size=6mm,inner sep=0pt}]
+  \node (v) at (0,0) {$v$};
+  \foreach \i/\lab in {1/v_1,2/v_2,3/v_3,4/v_4,5/v_5}{
+    \node (n\i) at (\i*72+90:1.6) {$\lab$};
+    \draw (v)--(n\i);
+  }
+  \draw[-{Latex[length=3mm]}, thick] (2.6,0) -- (3.6,0);
+
+  \begin{scope}[xshift=6.5cm]
+    \foreach \i in {1,...,5}{
+      \node (m\i) at (\i*72+90:1.6) {};
+    }
+    \foreach \i in {1,...,5}{
+      \foreach \j in {1,...,5}{
+        \ifnum\i<\j
+          \draw[highlightred] (m\i)--(m\j);
+        \fi
+      }
+    }
+    \node[draw=none,fill=none] at (0,-2.3) {\small $K_5$ (contradiction) as a subgraph};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+So at least two of the vertices $v_i$ are not adjacent (say $v_1$ and $v_2$). We contract the two edges $vv_1$ and $vv_2$; the resulting graph is a planar graph with fewer than $n$ vertices, and is thus 5-colourable.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85, every node/.style={circle,draw=accentblue,fill=accentblue!15,minimum size=6mm,inner sep=0pt}]
+  \node (v) at (0,0) {$v$};
+  \foreach \i/\lab in {1/v_1,2/v_2,3/v_3,4/v_4,5/v_5}{
+    \node (n\i) at (\i*72+90:1.6) {$\lab$};
+    \draw (v)--(n\i);
+  }
+  \draw[-{Latex[length=3mm]}, thick] (2.6,0) -- (3.6,0);
+
+  \begin{scope}[xshift=6.2cm]
+    \node (u) at (0,0.9) {$u$};
+    \node (n3) at (-1.6,-0.3) {$v_3$};
+    \node (n4) at (0,-1.6) {$v_4$};
+    \node (n5) at (1.6,-0.3) {$v_5$};
+    \draw (u)--(n3); \draw (u)--(n4); \draw (u)--(n5);
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+We now reinstate the two edges, giving both $v_1$ and $v_2$ the colour originally assigned to $v$. A 5-colouring of $G$ is then obtained by colouring $v$ with a colour different from the (at most four) colours assigned to the vertices $v_i$.
+\end{proof}
+
+% =========================================================
+\begin{thmbox}{Theorem 6 (Four Colour Theorem)}
+The vertices of any simple connected planar graph can be coloured with four (or fewer) colours.
+\end{thmbox}
+
+\begin{remark}
+Stated without proof in the original notes (the theorem's known proof is computer-assisted).
+\end{remark}
+
+\end{document}

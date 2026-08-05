@@ -1,0 +1,111 @@
+\documentclass[11pt]{scrartcl}
+
+% ---------- Packages ----------
+\usepackage[margin=1in]{geometry}
+\usepackage{mathpazo}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% ---------- Colors ----------
+\definecolor{accentblue}{RGB}{44,95,138}
+\definecolor{boxfill}{RGB}{240,245,250}
+\definecolor{boxborder}{RGB}{180,200,220}
+\definecolor{highlightred}{RGB}{200,50,50}
+
+% ---------- Theorem environments ----------
+\newtcolorbox{thmbox}[1]{
+  colback=boxfill, colframe=boxborder,
+  boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\bfseries\color{accentblue}, title=#1
+}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\hypersetup{colorlinks=true, linkcolor=accentblue, urlcolor=accentblue}
+
+\title{\color{accentblue}Trees}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+% =========================================================
+\begin{thmbox}{Theorem 1}
+Let $T$ be a graph of order $n$ (vertices). Then the following statements are equivalent:
+\begin{enumerate}
+  \item $T$ is a tree.
+  \item $T$ contains no cycles, and has $n-1$ edges.
+  \item $T$ is connected, and has $n-1$ edges.
+  \item $T$ is connected, and each edge is a bridge.
+  \item Any two vertices of $T$ are connected by exactly one path.
+  \item $T$ contains no cycles, but the addition of any new edge creates exactly one cycle.
+\end{enumerate}
+\end{thmbox}
+
+\begin{proof}
+For $n=1$, all the statements are trivial, so assume $n \geq 2$.
+
+\smallskip
+\noindent $1 \Rightarrow 2$: Since $T$ contains no cycles, the removal of any edge must disconnect $T$ into two graphs, each of which is a tree. It follows by induction that the number of edges in each of these two trees is one fewer than its number of vertices. We deduce that the total number of edges is
+$$(n_1 - 1) + (n_2 - 1) + 1 = n - 1.$$
+
+\smallskip
+\noindent $2 \Rightarrow 3$: By contradiction: if $T$ is disconnected, then each component of $T$ is a connected graph with no cycles, and hence the number of vertices in each component exceeds the number of edges in that component by exactly $1$. Summing over all components, the total number of vertices of $T$ exceeds the total number of edges by at least $2$ (since $T$ has at least two components), contradicting the fact that $T$ has $n-1$ edges.
+
+\smallskip
+\noindent $3 \Rightarrow 4$: The removal of any edge results in a graph with $n$ vertices and $n-2$ edges, which must be disconnected. Indeed, if a graph has $k$ components, $n$ vertices, and $m$ edges, then
+$$n-k \leq m \leq \frac{(n-k)(n-k+1)}{2},$$
+so for $m = n-1$ this holds only for $k=1$.
+
+\smallskip
+\noindent $4 \Rightarrow 5$: Since $T$ is connected, each pair of vertices is connected by at least one path. If a given pair of vertices were connected by two paths, then they would enclose a cycle, contradicting the fact that each edge is a bridge.
+
+\smallskip
+\noindent $5 \Rightarrow 6$: If $T$ contained a cycle, then any two vertices on that cycle would be connected by at least two paths, contradicting statement (5). If an edge $e = uv$ is added to $T$, a cycle is created, since $u$ and $v$ were already connected. Suppose now that adding $e = uv$ created more than one cycle; then there would be two paths from $u$ to $v$ in the original graph $T$, which contradicts (5).
+
+\smallskip
+\noindent $6 \Rightarrow 1$: Suppose that $T$ is disconnected. If we add an edge joining a vertex from one component to a vertex of another component, then no cycle is created, a contradiction.
+\end{proof}
+
+% =========================================================
+\begin{thmbox}{Theorem 2}
+If $n \geq 2$, any tree on $n$ vertices has at least two end-vertices (leaves).
+\end{thmbox}
+
+\begin{proof}
+By the Handshaking Lemma, $\sum d_i = 2|E| = 2n - 2$. If every vertex had degree at least $2$, we would have $\sum d_i \geq 2n$; since $2n - (2n-2) = 2$, this shows that there must be at least two vertices of degree $1$.
+\end{proof}
+
+% =========================================================
+\begin{thmbox}{Theorem 3}
+If $T$ is any spanning tree of a connected graph $G$, then:
+\begin{enumerate}
+  \item Each cutset of $G$ has an edge in common with $T$.
+  \item Each cycle of $G$ has an edge in common with the complement of $T$.
+\end{enumerate}
+\end{thmbox}
+
+\begin{proof}
+(1): Let $C^*$ be a cutset of $G$, the removal of which splits a component of $G$ into two subgraphs $H$ and $K$. Since $T$ is a spanning tree, $T$ must contain an edge joining a vertex of $H$ to a vertex of $K$; this is the required edge.
+
+\smallskip
+\noindent (2): Let $C$ be a cycle of $G$ having no edge in common with the complement of $T$. Then $C$ is contained in $T$, which is the required contradiction, since $T$ is acyclic.
+\end{proof}
+
+% =========================================================
+\begin{thmbox}{Corollary 1 (Spanning Trees in Complete Graphs)}
+The number of spanning trees of $K_n$ is $n^{n-2}$.
+\end{thmbox}
+
+\begin{remark}
+No proof was included in the original notes for this result. The notes give only the following intuition: every distinct tree with $n$ vertices can form a spanning tree in a complete graph with $n$ vertices.
+\end{remark}
+
+\end{document}
